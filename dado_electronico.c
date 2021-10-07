@@ -51,21 +51,48 @@ void display(int num){
     }
 }
 
+void delay(int time){
+    if(time == 0){
+        __delay_ms(5);
+    }
+    if(time == 1){
+        __delay_ms(100);
+    }
+    if(time == 2){
+        __delay_ms(150);
+    }
+}
+
 void main(void) {
     
     int resultado = 0;
     ADCON1 = 0x0F; //Utilizamos esto para desabilitar los puertos analogicos
     TRISB=0b00000000; //Asignamos salida los puertos B
-    TRISBbits.TRISB7 = 1;
+    TRISCbits.TRISC0 = 1; // Asignamos el pulsador de dado
+    TRISAbits.TRISA3 = 1; //Asignamos los puertos A como entrada
+    TRISAbits.TRISA4 = 1; //Estos asignan el delay de aleatorio
+    TRISAbits.TRISA5 = 1;
     
     while(1){
+        //Valor aleatorio del dado
         resultado = resultado + 1;
         if(resultado == 7){
             resultado = 1;
         }
-        if(PORTBbits.RB7 == 0)
+        if(PORTCbits.RC0 == 0){
             display(resultado);
-        //__delay_ms(500);
+        }
+        
+        //Ajuste del delay
+        if(PORTAbits.RA5 == 0){
+            delay(0);
+        }
+        if(PORTAbits.RA4 == 0){
+            delay(1);
+        }
+        if(PORTAbits.RA3 == 0){
+            delay(2);
+        }
     }
     
 }
