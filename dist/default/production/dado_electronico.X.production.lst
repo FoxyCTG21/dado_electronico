@@ -1,0 +1,584 @@
+
+
+Microchip MPLAB XC8 Assembler V2.10 build 88905656 
+                                                                                               Thu Oct 07 13:40:01 2021
+
+Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1 
+     1                           	processor	18F2550
+     2                           	fnconf	rparam,??,?,0
+     3                           	opt	pw 120
+     4                           	opt	flic
+     5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     6                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,noexec
+     7                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     8                           	psect	text1,global,reloc=2,class=CODE,delta=1
+     9                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    10                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    11  0000                     
+    12                           ; Version 2.10
+    13                           ; Generated 31/07/2019 GMT
+    14                           ; 
+    15                           ; Copyright © 2019, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    16                           ; All rights reserved.
+    17                           ; 
+    18                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    19                           ; 
+    20                           ; Redistribution and use in source and binary forms, with or without modification, are
+    21                           ; permitted provided that the following conditions are met:
+    22                           ; 
+    23                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    24                           ;        conditions and the following disclaimer.
+    25                           ; 
+    26                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    27                           ;        of conditions and the following disclaimer in the documentation and/or other
+    28                           ;        materials provided with the distribution.
+    29                           ; 
+    30                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    31                           ;        software without specific prior written permission.
+    32                           ; 
+    33                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    34                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    35                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    36                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    37                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    38                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    39                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    40                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    41                           ; 
+    42                           ; 
+    43                           ; Code-generator required, PIC18F2550 Definitions
+    44                           ; 
+    45                           ; SFR Addresses
+    46  0000                     _PORTBbits	set	3969
+    47  0000                     _TRISBbits	set	3987
+    48  0000                     _TRISB	set	3987
+    49  0000                     _ADCON1	set	4033
+    50  0000                     _LATB	set	3978
+    51                           
+    52                           ; #config settings
+    53  0000                     
+    54                           	psect	cinit
+    55  007E8C                     __pcinit:
+    56                           	opt callstack 0
+    57  007E8C                     start_initialization:
+    58                           	opt callstack 0
+    59  007E8C                     __initialization:
+    60                           	opt callstack 0
+    61  007E8C                     end_of_initialization:
+    62                           	opt callstack 0
+    63  007E8C                     __end_of__initialization:
+    64                           	opt callstack 0
+    65  007E8C  0100               	movlb	0
+    66  007E8E  EF49  F03F         	goto	_main	;jump to C main() function
+    67                           
+    68                           	psect	cstackCOMRAM
+    69  000001                     __pcstackCOMRAM:
+    70                           	opt callstack 0
+    71  000001                     display@num:
+    72                           	opt callstack 0
+    73                           
+    74                           ; 2 bytes @ 0x0
+    75  000001                     	ds	2
+    76  000003                     main@resultado:
+    77                           	opt callstack 0
+    78                           
+    79                           ; 2 bytes @ 0x2
+    80  000003                     	ds	2
+    81                           
+    82 ;;
+    83 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+    84 ;;
+    85 ;; *************** function _main *****************
+    86 ;; Defined at:
+    87 ;;		line 54 in file "dado_electronico.c"
+    88 ;; Parameters:    Size  Location     Type
+    89 ;;		None
+    90 ;; Auto vars:     Size  Location     Type
+    91 ;;  resultado       2    2[COMRAM] int 
+    92 ;; Return value:  Size  Location     Type
+    93 ;;                  1    wreg      void 
+    94 ;; Registers used:
+    95 ;;		wreg, status,2, status,0, cstack
+    96 ;; Tracked objects:
+    97 ;;		On entry : 0/0
+    98 ;;		On exit  : 0/0
+    99 ;;		Unchanged: 0/0
+   100 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   101 ;;      Params:         0       0       0       0       0       0       0       0       0
+   102 ;;      Locals:         2       0       0       0       0       0       0       0       0
+   103 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   104 ;;      Totals:         2       0       0       0       0       0       0       0       0
+   105 ;;Total ram usage:        2 bytes
+   106 ;; Hardware stack levels required when called:    1
+   107 ;; This function calls:
+   108 ;;		_display
+   109 ;; This function is called by:
+   110 ;;		Startup code after reset
+   111 ;; This function uses a non-reentrant model
+   112 ;;
+   113                           
+   114                           	psect	text0
+   115  007E92                     __ptext0:
+   116                           	opt callstack 0
+   117  007E92                     _main:
+   118                           	opt callstack 30
+   119  007E92                     
+   120                           ;dado_electronico.c: 56: }
+   121  007E92  0E00               	movlw	0
+   122  007E94  6E04               	movwf	(main@resultado+1)^0,c
+   123  007E96  0E00               	movlw	0
+   124  007E98  6E03               	movwf	main@resultado^0,c
+   125  007E9A  0E0F               	movlw	15
+   126  007E9C  6EC1               	movwf	193,c	;volatile
+   127  007E9E  0E00               	movlw	0
+   128  007EA0  6E93               	movwf	147,c	;volatile
+   129  007EA2  8E93               	bsf	147,7,c	;volatile
+   130  007EA4                     l820:
+   131  007EA4  0E01               	movlw	1
+   132  007EA6  2403               	addwf	main@resultado^0,w,c
+   133  007EA8  6E03               	movwf	main@resultado^0,c
+   134  007EAA  0E00               	movlw	0
+   135  007EAC  2004               	addwfc	(main@resultado+1)^0,w,c
+   136  007EAE  6E04               	movwf	(main@resultado+1)^0,c
+   137  007EB0  0E07               	movlw	7
+   138  007EB2  1803               	xorwf	main@resultado^0,w,c
+   139  007EB4  1004               	iorwf	(main@resultado+1)^0,w,c
+   140  007EB6  A4D8               	btfss	status,2,c
+   141  007EB8  EF60  F03F         	goto	u251
+   142  007EBC  EF62  F03F         	goto	u250
+   143  007EC0                     u251:
+   144  007EC0  EF66  F03F         	goto	l826
+   145  007EC4                     u250:
+   146  007EC4  0E00               	movlw	0
+   147  007EC6  6E04               	movwf	(main@resultado+1)^0,c
+   148  007EC8  0E01               	movlw	1
+   149  007ECA  6E03               	movwf	main@resultado^0,c
+   150  007ECC                     l826:
+   151  007ECC  BE81               	btfsc	129,7,c	;volatile
+   152  007ECE  EF6B  F03F         	goto	u261
+   153  007ED2  EF6D  F03F         	goto	u260
+   154  007ED6                     u261:
+   155  007ED6  EF52  F03F         	goto	l820
+   156  007EDA                     u260:
+   157  007EDA  C003  F001         	movff	main@resultado,display@num
+   158  007EDE  C004  F002         	movff	main@resultado+1,display@num+1
+   159  007EE2  EC77  F03F         	call	_display	;wreg free
+   160  007EE6  EF52  F03F         	goto	l820
+   161  007EEA  EF00  F000         	goto	start
+   162  007EEE                     __end_of_main:
+   163                           	opt callstack 0
+   164                           
+   165 ;; *************** function _display *****************
+   166 ;; Defined at:
+   167 ;;		line 16 in file "dado_electronico.c"
+   168 ;; Parameters:    Size  Location     Type
+   169 ;;  num             2    0[COMRAM] int 
+   170 ;; Auto vars:     Size  Location     Type
+   171 ;;		None
+   172 ;; Return value:  Size  Location     Type
+   173 ;;                  1    wreg      void 
+   174 ;; Registers used:
+   175 ;;		wreg, status,2, status,0
+   176 ;; Tracked objects:
+   177 ;;		On entry : 0/0
+   178 ;;		On exit  : 0/0
+   179 ;;		Unchanged: 0/0
+   180 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   181 ;;      Params:         2       0       0       0       0       0       0       0       0
+   182 ;;      Locals:         0       0       0       0       0       0       0       0       0
+   183 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   184 ;;      Totals:         2       0       0       0       0       0       0       0       0
+   185 ;;Total ram usage:        2 bytes
+   186 ;; Hardware stack levels used:    1
+   187 ;; This function calls:
+   188 ;;		Nothing
+   189 ;; This function is called by:
+   190 ;;		_main
+   191 ;; This function uses a non-reentrant model
+   192 ;;
+   193                           
+   194                           	psect	text1
+   195  007EEE                     __ptext1:
+   196                           	opt callstack 0
+   197  007EEE                     _display:
+   198                           	opt callstack 30
+   199  007EEE                     
+   200                           ;dado_electronico.c: 17:         LATB = 0b1100110;
+   201  007EEE  0E00               	movlw	0
+   202  007EF0  6E8A               	movwf	138,c	;volatile
+   203  007EF2                     
+   204                           ;dado_electronico.c: 19:     if(num == 5){
+   205  007EF2  5001               	movf	display@num^0,w,c
+   206  007EF4  1002               	iorwf	(display@num+1)^0,w,c
+   207  007EF6  A4D8               	btfss	status,2,c
+   208  007EF8  EF80  F03F         	goto	u141
+   209  007EFC  EF82  F03F         	goto	u140
+   210  007F00                     u141:
+   211  007F00  EF84  F03F         	goto	l776
+   212  007F04                     u140:
+   213  007F04                     
+   214                           ;dado_electronico.c: 20:         LATB = 0b1101101;
+   215  007F04  0E3F               	movlw	63
+   216  007F06  6E8A               	movwf	138,c	;volatile
+   217  007F08                     l776:
+   218                           
+   219                           ;dado_electronico.c: 22:     if(num == 6){
+   220  007F08  0401               	decf	display@num^0,w,c
+   221  007F0A  1002               	iorwf	(display@num+1)^0,w,c
+   222  007F0C  A4D8               	btfss	status,2,c
+   223  007F0E  EF8B  F03F         	goto	u151
+   224  007F12  EF8D  F03F         	goto	u150
+   225  007F16                     u151:
+   226  007F16  EF8F  F03F         	goto	l780
+   227  007F1A                     u150:
+   228  007F1A                     
+   229                           ;dado_electronico.c: 23:         LATB = 0b1111101;
+   230  007F1A  0E06               	movlw	6
+   231  007F1C  6E8A               	movwf	138,c	;volatile
+   232  007F1E                     l780:
+   233                           
+   234                           ;dado_electronico.c: 25:     if(num == 7){
+   235  007F1E  0E02               	movlw	2
+   236  007F20  1801               	xorwf	display@num^0,w,c
+   237  007F22  1002               	iorwf	(display@num+1)^0,w,c
+   238  007F24  A4D8               	btfss	status,2,c
+   239  007F26  EF97  F03F         	goto	u161
+   240  007F2A  EF99  F03F         	goto	u160
+   241  007F2E                     u161:
+   242  007F2E  EF9B  F03F         	goto	l784
+   243  007F32                     u160:
+   244  007F32                     
+   245                           ;dado_electronico.c: 26:         LATB = 0b0000111;
+   246  007F32  0E5B               	movlw	91
+   247  007F34  6E8A               	movwf	138,c	;volatile
+   248  007F36                     l784:
+   249                           
+   250                           ;dado_electronico.c: 28:     if(num == 8){
+   251  007F36  0E03               	movlw	3
+   252  007F38  1801               	xorwf	display@num^0,w,c
+   253  007F3A  1002               	iorwf	(display@num+1)^0,w,c
+   254  007F3C  A4D8               	btfss	status,2,c
+   255  007F3E  EFA3  F03F         	goto	u171
+   256  007F42  EFA5  F03F         	goto	u170
+   257  007F46                     u171:
+   258  007F46  EFA7  F03F         	goto	l788
+   259  007F4A                     u170:
+   260  007F4A                     
+   261                           ;dado_electronico.c: 29:         LATB = 0b1111111;
+   262  007F4A  0E4F               	movlw	79
+   263  007F4C  6E8A               	movwf	138,c	;volatile
+   264  007F4E                     l788:
+   265                           
+   266                           ;dado_electronico.c: 31:     if(num == 9){
+   267  007F4E  0E04               	movlw	4
+   268  007F50  1801               	xorwf	display@num^0,w,c
+   269  007F52  1002               	iorwf	(display@num+1)^0,w,c
+   270  007F54  A4D8               	btfss	status,2,c
+   271  007F56  EFAF  F03F         	goto	u181
+   272  007F5A  EFB1  F03F         	goto	u180
+   273  007F5E                     u181:
+   274  007F5E  EFB3  F03F         	goto	l792
+   275  007F62                     u180:
+   276  007F62                     
+   277                           ;dado_electronico.c: 32:         LATB = 0b1100111;
+   278  007F62  0E66               	movlw	102
+   279  007F64  6E8A               	movwf	138,c	;volatile
+   280  007F66                     l792:
+   281                           
+   282                           ;dado_electronico.c: 34:     if(num > 9){
+   283  007F66  0E05               	movlw	5
+   284  007F68  1801               	xorwf	display@num^0,w,c
+   285  007F6A  1002               	iorwf	(display@num+1)^0,w,c
+   286  007F6C  A4D8               	btfss	status,2,c
+   287  007F6E  EFBB  F03F         	goto	u191
+   288  007F72  EFBD  F03F         	goto	u190
+   289  007F76                     u191:
+   290  007F76  EFBF  F03F         	goto	l796
+   291  007F7A                     u190:
+   292  007F7A                     
+   293                           ;dado_electronico.c: 35:         LATB = 0b1110001;
+   294  007F7A  0E6D               	movlw	109
+   295  007F7C  6E8A               	movwf	138,c	;volatile
+   296  007F7E                     l796:
+   297                           
+   298                           ;dado_electronico.c: 37: }
+   299  007F7E  0E06               	movlw	6
+   300  007F80  1801               	xorwf	display@num^0,w,c
+   301  007F82  1002               	iorwf	(display@num+1)^0,w,c
+   302  007F84  A4D8               	btfss	status,2,c
+   303  007F86  EFC7  F03F         	goto	u201
+   304  007F8A  EFC9  F03F         	goto	u200
+   305  007F8E                     u201:
+   306  007F8E  EFCB  F03F         	goto	l800
+   307  007F92                     u200:
+   308  007F92                     
+   309                           ;dado_electronico.c: 38: 
+   310  007F92  0E7D               	movlw	125
+   311  007F94  6E8A               	movwf	138,c	;volatile
+   312  007F96                     l800:
+   313                           
+   314                           ;dado_electronico.c: 40: 
+   315  007F96  0E07               	movlw	7
+   316  007F98  1801               	xorwf	display@num^0,w,c
+   317  007F9A  1002               	iorwf	(display@num+1)^0,w,c
+   318  007F9C  A4D8               	btfss	status,2,c
+   319  007F9E  EFD3  F03F         	goto	u211
+   320  007FA2  EFD5  F03F         	goto	u210
+   321  007FA6                     u211:
+   322  007FA6  EFD7  F03F         	goto	l804
+   323  007FAA                     u210:
+   324  007FAA                     
+   325                           ;dado_electronico.c: 41:     int resultado = 0;
+   326  007FAA  0E07               	movlw	7
+   327  007FAC  6E8A               	movwf	138,c	;volatile
+   328  007FAE                     l804:
+   329                           
+   330                           ;dado_electronico.c: 43:     TRISB=0b00000000;
+   331  007FAE  0E08               	movlw	8
+   332  007FB0  1801               	xorwf	display@num^0,w,c
+   333  007FB2  1002               	iorwf	(display@num+1)^0,w,c
+   334  007FB4  A4D8               	btfss	status,2,c
+   335  007FB6  EFDF  F03F         	goto	u221
+   336  007FBA  EFE1  F03F         	goto	u220
+   337  007FBE                     u221:
+   338  007FBE  EFE3  F03F         	goto	l808
+   339  007FC2                     u220:
+   340  007FC2                     
+   341                           ;dado_electronico.c: 44:     TRISBbits.TRISB7 = 1;
+   342  007FC2  0E7F               	movlw	127
+   343  007FC4  6E8A               	movwf	138,c	;volatile
+   344  007FC6                     l808:
+   345                           
+   346                           ;dado_electronico.c: 46:     while(1){
+   347  007FC6  0E09               	movlw	9
+   348  007FC8  1801               	xorwf	display@num^0,w,c
+   349  007FCA  1002               	iorwf	(display@num+1)^0,w,c
+   350  007FCC  A4D8               	btfss	status,2,c
+   351  007FCE  EFEB  F03F         	goto	u231
+   352  007FD2  EFED  F03F         	goto	u230
+   353  007FD6                     u231:
+   354  007FD6  EFEF  F03F         	goto	l812
+   355  007FDA                     u230:
+   356  007FDA                     
+   357                           ;dado_electronico.c: 47:         resultado = resultado + 1;
+   358  007FDA  0E67               	movlw	103
+   359  007FDC  6E8A               	movwf	138,c	;volatile
+   360  007FDE                     l812:
+   361                           
+   362                           ;dado_electronico.c: 49:             resultado = 1;
+   363  007FDE  BE02               	btfsc	(display@num+1)^0,7,c
+   364  007FE0  EFFB  F03F         	goto	u241
+   365  007FE4  5002               	movf	(display@num+1)^0,w,c
+   366  007FE6  E109               	bnz	u240
+   367  007FE8  0E0A               	movlw	10
+   368  007FEA  5C01               	subwf	display@num^0,w,c
+   369  007FEC  A0D8               	btfss	status,0,c
+   370  007FEE  EFFB  F03F         	goto	u241
+   371  007FF2  EFFD  F03F         	goto	u240
+   372  007FF6                     u241:
+   373  007FF6  EFFF  F03F         	goto	l24
+   374  007FFA                     u240:
+   375  007FFA                     
+   376                           ;dado_electronico.c: 50:         }
+   377  007FFA  0E71               	movlw	113
+   378  007FFC  6E8A               	movwf	138,c	;volatile
+   379  007FFE                     l24:
+   380  007FFE  0012               	return		;funcret
+   381  008000                     __end_of_display:
+   382                           	opt callstack 0
+   383  0000                     
+   384                           	psect	rparam
+   385  0000                     tosu	equ	0xFFF
+   386                           tosh	equ	0xFFE
+   387                           tosl	equ	0xFFD
+   388                           stkptr	equ	0xFFC
+   389                           pclatu	equ	0xFFB
+   390                           pclath	equ	0xFFA
+   391                           pcl	equ	0xFF9
+   392                           tblptru	equ	0xFF8
+   393                           tblptrh	equ	0xFF7
+   394                           tblptrl	equ	0xFF6
+   395                           tablat	equ	0xFF5
+   396                           prodh	equ	0xFF4
+   397                           prodl	equ	0xFF3
+   398                           indf0	equ	0xFEF
+   399                           postinc0	equ	0xFEE
+   400                           postdec0	equ	0xFED
+   401                           preinc0	equ	0xFEC
+   402                           plusw0	equ	0xFEB
+   403                           fsr0h	equ	0xFEA
+   404                           fsr0l	equ	0xFE9
+   405                           wreg	equ	0xFE8
+   406                           indf1	equ	0xFE7
+   407                           postinc1	equ	0xFE6
+   408                           postdec1	equ	0xFE5
+   409                           preinc1	equ	0xFE4
+   410                           plusw1	equ	0xFE3
+   411                           fsr1h	equ	0xFE2
+   412                           fsr1l	equ	0xFE1
+   413                           bsr	equ	0xFE0
+   414                           indf2	equ	0xFDF
+   415                           postinc2	equ	0xFDE
+   416                           postdec2	equ	0xFDD
+   417                           preinc2	equ	0xFDC
+   418                           plusw2	equ	0xFDB
+   419                           fsr2h	equ	0xFDA
+   420                           fsr2l	equ	0xFD9
+   421                           status	equ	0xFD8
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95      4       4
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+    BANK6           256      0       0
+    BANK7           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    _main->_display
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 2     2      0     387
+                                              2 COMRAM     2     2      0
+                            _display
+ ---------------------------------------------------------------------------------
+ (1) _display                                              2     0      2     318
+                                              0 COMRAM     2     0      2
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _display
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F      4       4       1        4.2%
+STACK                0      0       0       2        0.0%
+DATA                 0      0       0       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBANK6           100      0       0      16        0.0%
+BANK6              100      0       0      17        0.0%
+BITBANK7           100      0       0      18        0.0%
+BANK7              100      0       0      19        0.0%
+ABS                  0      0       0      20        0.0%
+BIGRAM             7FF      0       0      21        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.10 build 88905656 
+Symbol Table                                                                                   Thu Oct 07 13:40:01 2021
+
+                     l24 7FFE                      l800 7F96                      l810 7FDA  
+                    l802 7FAA                      l812 7FDE                      l804 7FAE  
+                    l820 7EA4                      l814 7FFA                      l806 7FC2  
+                    l822 7EB0                      l808 7FC6                      l824 7EC4  
+                    l816 7E92                      l770 7EEE                      l826 7ECC  
+                    l818 7EA2                      l780 7F1E                      l772 7EF2  
+                    l828 7EDA                      l790 7F62                      l782 7F32  
+                    l774 7F04                      l792 7F66                      l784 7F36  
+                    l776 7F08                      l794 7F7A                      l786 7F4A  
+                    l778 7F1A                      l796 7F7E                      l788 7F4E  
+                    l798 7F92                      u200 7F92                      u201 7F8E  
+                    u210 7FAA                      u211 7FA6                      u220 7FC2  
+                    u140 7F04                      u221 7FBE                      u141 7F00  
+                    u230 7FDA                      u150 7F1A                      u231 7FD6  
+                    u151 7F16                      u240 7FFA                      u160 7F32  
+                    u241 7FF6                      u161 7F2E                      u170 7F4A  
+                    u250 7EC4                      u171 7F46                      u251 7EC0  
+                    u180 7F62                      u260 7EDA                      u181 7F5E  
+                    u261 7ED6                      u190 7F7A                      u191 7F76  
+           __CFG_LVP$OFF 000000                     _LATB 000F8A                     _main 7E92  
+                   start 0000             ___param_bank 000000            __CFG_PLLDIV$5 000000  
+                  ?_main 0001                    _TRISB 000F93          __end_of_display 8000  
+                  status 000FD8          __initialization 7E8C             __end_of_main 7EEE  
+                 ??_main 0003            __activetblptr 000000                   _ADCON1 000FC1  
+              ??_display 0003            main@resultado 0003               __accesstop 0060  
+__end_of__initialization 7E8C            ___rparam_used 000001           __pcstackCOMRAM 0001  
+                __Hparam 0000                  __Lparam 0000                  __pcinit 7E8C  
+                __ramtop 0800                  __ptext0 7E92                  __ptext1 7EEE  
+                _display 7EEE     end_of_initialization 7E8C                _PORTBbits 000F81  
+              _TRISBbits 000F93               display@num 0001      start_initialization 7E8C  
+               ?_display 0001                 __Hrparam 0000                 __Lrparam 0000  
+       __size_of_display 0112            __size_of_main 005C    __CFG_CPUDIV$OSC1_PLL2 000000  
+     __CFG_FOSC$HSPLL_HS 000000  
